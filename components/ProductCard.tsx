@@ -44,21 +44,21 @@ export default function ProductCard({ product }: { product: Product }) {
         </button>
       </Link>
 
-      <div className="mt-4">
-        <p className="text-xs uppercase tracking-wide text-muted">
+      <div className="mt-3 sm:mt-4">
+        <p className="text-[11px] uppercase tracking-wide text-muted sm:text-xs">
           {product.brand}
         </p>
         <Link href={`/produkt/${product.slug}`}>
-          <h3 className="mt-1 text-sm font-medium hover:text-accent transition-colors">
+          <h3 className="mt-1 text-xs font-medium hover:text-accent transition-colors sm:text-sm">
             {product.name}
           </h3>
         </Link>
-        <div className="mt-1.5 flex items-center gap-1 text-xs text-muted">
+        <div className="mt-1.5 flex items-center gap-1 text-[11px] text-muted sm:text-xs">
           <div className="flex text-fg">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}
-                size={12}
+                size={11}
                 strokeWidth={0}
                 fill={i < Math.round(product.rating) ? "currentColor" : "#E6E6E9"}
               />
@@ -66,18 +66,18 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
           <span>&middot; {product.reviewCount} opinii</span>
         </div>
-        <div className="mt-3 flex items-center justify-between">
+        <div className="mt-2.5 flex flex-col gap-2 sm:mt-3 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
           <span className="flex items-center gap-2">
-            <span className="text-sm font-medium">{formatPrice(product.price)}</span>
+            <span className="text-xs font-medium sm:text-sm">{formatPrice(product.price)}</span>
             {product.compareAtPrice && (
-              <span className="text-xs text-muted line-through">
+              <span className="text-[11px] text-muted line-through sm:text-xs">
                 {formatPrice(product.compareAtPrice)}
               </span>
             )}
           </span>
           <button
             onClick={() => addItem(product)}
-            className="rounded-full bg-fg px-4 py-2 text-xs font-medium text-bg transition-colors hover:bg-accent"
+            className="w-full rounded-full bg-fg px-3 py-1.5 text-[11px] font-medium text-bg transition-colors hover:bg-accent sm:w-auto sm:px-4 sm:py-2 sm:text-xs"
           >
             Do koszyka
           </button>

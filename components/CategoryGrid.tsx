@@ -19,7 +19,7 @@ function CategoryCard({ category }: { category: Category }) {
           src={`/kategorie/${category.slug}.jpg`}
           alt={category.name}
           fill
-          sizes="(max-width: 768px) 50vw, 25vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 25vw"
           className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
           onError={() => setBroken(true)}
         />
@@ -35,11 +35,11 @@ function CategoryCard({ category }: { category: Category }) {
 
 export default function CategoryGrid() {
   return (
-    <section className="max-w-wrap mx-auto px-6 py-20 md:px-10">
-      <h2 className="font-display text-3xl font-medium tracking-tightest md:text-4xl">
+    <section className="max-w-wrap mx-auto px-6 py-14 sm:py-20 md:px-10">
+      <h2 className="font-display text-2xl font-medium tracking-tightest sm:text-3xl md:text-4xl">
         Kupuj według kategorii
       </h2>
-      <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3">
         {CATEGORIES.map((category) => (
           <CategoryCard key={category.slug} category={category} />
         ))}

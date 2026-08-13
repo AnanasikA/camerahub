@@ -71,28 +71,30 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
         exit={{ opacity: 0, y: -12 }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="max-w-wrap mx-auto px-6 py-8 md:px-10">
+        <div className="max-w-wrap mx-auto px-6 py-6 sm:py-8 md:px-10">
           <div className="flex items-center gap-3 border-b border-fg/20 pb-4">
-            <Search size={20} strokeWidth={1.6} className="text-muted" />
+            <Search size={18} strokeWidth={1.6} className="text-muted sm:hidden" />
+            <Search size={20} strokeWidth={1.6} className="hidden text-muted sm:block" />
             <input
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               type="text"
               placeholder="Szukaj aparatów, obiektywów, marek…"
-              className="flex-1 bg-transparent text-xl outline-none placeholder:text-muted"
+              className="flex-1 bg-transparent text-base outline-none placeholder:text-muted sm:text-xl"
             />
             <button
               aria-label="Zamknij wyszukiwanie"
               onClick={onClose}
               className="text-muted hover:text-fg"
             >
-              <X size={20} strokeWidth={1.6} />
+              <X size={18} strokeWidth={1.6} className="sm:hidden" />
+              <X size={20} strokeWidth={1.6} className="hidden sm:block" />
             </button>
           </div>
 
           {!query.trim() ? (
-            <div className="grid grid-cols-1 gap-10 pt-8 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 pt-6 sm:gap-10 sm:pt-8 md:grid-cols-2">
               <div>
                 <p className="text-xs font-medium uppercase tracking-wide text-muted">
                   Popularne wyszukiwania
@@ -102,7 +104,7 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
                     <button
                       key={term}
                       onClick={() => setQuery(term)}
-                      className="rounded-full border border-border px-4 py-2 text-sm text-fg/80 hover:border-fg/40 hover:text-fg"
+                      className="rounded-full border border-border px-3 py-1.5 text-xs text-fg/80 hover:border-fg/40 hover:text-fg sm:px-4 sm:py-2 sm:text-sm"
                     >
                       {term}
                     </button>
@@ -114,7 +116,7 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
                 <p className="text-xs font-medium uppercase tracking-wide text-muted">
                   Kategorie
                 </p>
-                <ul className="mt-4 flex flex-col gap-3">
+                <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 sm:flex sm:flex-col sm:gap-3">
                   {CATEGORIES.map((category) => (
                     <li key={category.slug}>
                       <Link
@@ -130,7 +132,7 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
               </div>
             </div>
           ) : (
-            <div className="max-h-[60vh] overflow-y-auto pt-6">
+            <div className="max-h-[60vh] overflow-y-auto pt-5 sm:pt-6">
               {results.length === 0 ? (
                 <p className="px-2 py-8 text-center text-sm text-muted">
                   Brak wyników dla &bdquo;{query}&rdquo;.
@@ -142,9 +144,9 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
                       <Link
                         href={`/produkt/${product.slug}`}
                         onClick={onClose}
-                        className="flex items-center gap-4 rounded-xl px-3 py-2.5 hover:bg-surface"
+                        className="flex items-center gap-3 rounded-xl px-2 py-2 hover:bg-surface sm:gap-4 sm:px-3 sm:py-2.5"
                       >
-                        <div className="viewfinder relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-lg text-fg/40">
+                        <div className="viewfinder relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-lg text-fg/40 sm:h-12 sm:w-12">
                           <Image
                             src={`/produkty/${product.slug}.jpg`}
                             alt={product.name}
@@ -153,13 +155,13 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
                             className="object-contain p-1"
                           />
                         </div>
-                        <div className="flex-1">
-                          <p className="text-xs uppercase tracking-wide text-muted">
+                        <div className="min-w-0 flex-1">
+                          <p className="text-[11px] uppercase tracking-wide text-muted sm:text-xs">
                             {product.brand}
                           </p>
-                          <p className="text-sm font-medium">{product.name}</p>
+                          <p className="truncate text-sm font-medium">{product.name}</p>
                         </div>
-                        <span className="text-sm text-muted">
+                        <span className="flex-shrink-0 text-xs text-muted sm:text-sm">
                           {formatPrice(product.price)}
                         </span>
                       </Link>

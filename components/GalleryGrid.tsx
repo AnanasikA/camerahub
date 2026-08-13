@@ -16,11 +16,11 @@ export default function GalleryGrid() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section className="max-w-wrap mx-auto px-6 py-20 md:px-10">
-      <h2 className="font-display text-3xl font-medium tracking-tightest md:text-4xl">
+    <section className="max-w-wrap mx-auto px-6 py-14 sm:py-20 md:px-10">
+      <h2 className="font-display text-2xl font-medium tracking-tightest sm:text-3xl md:text-4xl">
         Zrobione z CameraHub
       </h2>
-      <p className="mt-2 text-muted">
+      <p className="mt-2 text-sm text-muted sm:text-base">
         Bliższe spojrzenie na świat przez nasz sprzęt.
       </p>
 
@@ -28,7 +28,7 @@ export default function GalleryGrid() {
           5 zdjęciach automatyczne kolumny CSS potrafią zostawić puste
           miejsca, bo same decydują, które zdjęcie trafia do której
           kolumny. Stała siatka gwarantuje brak dziur. */}
-      <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-3 lg:[grid-auto-rows:260px]">
+      <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-4 lg:grid-cols-3 lg:[grid-auto-rows:260px]">
         {ITEMS.map((item, index) => (
           <GalleryTile
             key={item.slug}
@@ -135,7 +135,7 @@ function Lightbox({
 
   return (
     <motion.div
-      className="fixed inset-0 z-[999] flex items-center justify-center p-6"
+      className="fixed inset-0 z-[999] flex items-center justify-center p-4 sm:p-6"
       style={{ backgroundColor: "rgba(0, 0, 0, 0.96)" }}
       onClick={onClose}
       role="dialog"
@@ -149,9 +149,10 @@ function Lightbox({
       <button
         aria-label="Zamknij podgląd"
         onClick={onClose}
-        className="absolute right-6 top-6 z-10 text-white/80 hover:text-white"
+        className="absolute right-4 top-4 z-10 text-white/80 hover:text-white sm:right-6 sm:top-6"
       >
-        <X size={26} strokeWidth={1.6} />
+        <X size={22} strokeWidth={1.6} className="sm:hidden" />
+        <X size={26} strokeWidth={1.6} className="hidden sm:block" />
       </button>
 
       <button
@@ -160,9 +161,10 @@ function Lightbox({
           e.stopPropagation();
           onNavigate((activeIndex - 1 + items.length) % items.length);
         }}
-        className="absolute left-4 z-10 text-white/80 hover:text-white md:left-8"
+        className="absolute left-2 z-10 text-white/80 hover:text-white sm:left-4 md:left-8"
       >
-        <ChevronLeft size={32} strokeWidth={1.4} />
+        <ChevronLeft size={24} strokeWidth={1.5} className="sm:hidden" />
+        <ChevronLeft size={32} strokeWidth={1.4} className="hidden sm:block" />
       </button>
 
       <motion.img
@@ -173,7 +175,7 @@ function Lightbox({
         initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-        className="max-h-[85vh] max-w-[92vw] object-contain"
+        className="max-h-[75vh] max-w-[85vw] object-contain sm:max-h-[85vh] sm:max-w-[92vw]"
       />
 
       <button
@@ -182,14 +184,15 @@ function Lightbox({
           e.stopPropagation();
           onNavigate((activeIndex + 1) % items.length);
         }}
-        className="absolute right-4 z-10 text-white/80 hover:text-white md:right-8"
+        className="absolute right-2 z-10 text-white/80 hover:text-white sm:right-4 md:right-8"
       >
-        <ChevronRight size={32} strokeWidth={1.4} />
+        <ChevronRight size={24} strokeWidth={1.5} className="sm:hidden" />
+        <ChevronRight size={32} strokeWidth={1.4} className="hidden sm:block" />
       </button>
 
-      <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1">
-        <p className="text-sm text-white/70">{item.label}</p>
-        <p className="text-xs text-white/40">
+      <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 px-10 text-center sm:bottom-6 sm:px-0">
+        <p className="text-xs text-white/70 sm:text-sm">{item.label}</p>
+        <p className="text-[11px] text-white/40 sm:text-xs">
           {activeIndex + 1} / {items.length}
         </p>
       </div>
